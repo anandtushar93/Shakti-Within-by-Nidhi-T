@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200">
+  <defs>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#C9A227;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#E6B85C;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#C9A227;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background: soft cream -->
+  <rect width="200" height="200" fill="#FFFDF9" rx="20"/>
+
+  <!-- Left wing sweep -->
+  <path d="M100,88 C85,65 60,55 30,58 C20,59 12,63 10,68 C25,60 50,62 70,75 C80,82 88,90 100,96"
+        fill="none" stroke="url(#goldGrad)" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M100,88 C88,72 65,60 40,62 C28,63 18,68 16,74 C30,66 55,68 72,80 C84,88 92,96 100,100"
+        fill="none" stroke="url(#goldGrad)" stroke-width="1" stroke-linecap="round" opacity="0.6"/>
+  <path d="M100,96 C90,78 68,68 45,70 C35,71 26,76 24,82"
+        fill="none" stroke="url(#goldGrad)" stroke-width="0.75" stroke-linecap="round" opacity="0.4"/>
+
+  <!-- Right wing sweep (mirror) -->
+  <path d="M100,88 C115,65 140,55 170,58 C180,59 188,63 190,68 C175,60 150,62 130,75 C120,82 112,90 100,96"
+        fill="none" stroke="url(#goldGrad)" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M100,88 C112,72 135,60 160,62 C172,63 182,68 184,74 C170,66 145,68 128,80 C116,88 108,96 100,100"
+        fill="none" stroke="url(#goldGrad)" stroke-width="1" stroke-linecap="round" opacity="0.6"/>
+  <path d="M100,96 C110,78 132,68 155,70 C165,71 174,76 176,82"
+        fill="none" stroke="url(#goldGrad)" stroke-width="0.75" stroke-linecap="round" opacity="0.4"/>
+
+  <!-- Infinity symbol (∞) at center -->
+  <path d="M82,92 C82,84 90,80 96,84 C100,87 100,92 100,92 C100,92 100,97 104,100 C110,104 118,100 118,92 C118,84 110,80 104,84 C100,87 100,92 100,92 C100,92 100,97 96,100 C90,104 82,100 82,92 Z"
+        fill="none" stroke="url(#goldGrad)" stroke-width="1.5"/>
+
+  <!-- N letter below -->
+  <text x="100" y="135" text-anchor="middle"
+        font-family="Cormorant Garamond, Georgia, serif"
+        font-size="28" font-weight="500"
+        fill="url(#goldGrad)">N</text>
+
+  <!-- Small accent dots on wings -->
+  <circle cx="65" cy="70" r="1.5" fill="#E6B85C" opacity="0.7"/>
+  <circle cx="135" cy="70" r="1.5" fill="#E6B85C" opacity="0.7"/>
+</svg>
