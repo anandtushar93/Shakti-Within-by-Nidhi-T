@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowUp, Heart } from 'lucide-react';
+import { ArrowUp, Heart, Share2 } from 'lucide-react';
 import { BRAND } from '../../constants';
 import { smoothScrollTo } from '../../utils';
 import Container from '../Shared/Container';
+import ShareModal from '../Shared/ShareModal';
 
 // ─── Footer Component ─────────────────────────────────────────────────────────
 const Footer: React.FC = () => {
   const year = new Date().getFullYear();
+  const [shareOpen, setShareOpen] = useState(false);
 
   return (
     <footer
@@ -65,7 +67,7 @@ const Footer: React.FC = () => {
             ))}
           </nav>
 
-          {/* Right: Social + Back to Top */}
+          {/* Right: Social + Share + Back to Top */}
           <div className="flex flex-col items-center md:items-end gap-4">
             {/* Social Links */}
             <div className="flex items-center gap-3">
@@ -113,6 +115,24 @@ const Footer: React.FC = () => {
               </a>
             </div>
 
+            {/* Share Button */}
+            <motion.button
+              onClick={() => setShareOpen(true)}
+              className="flex items-center gap-1.5 px-4 py-2 rounded-xl font-body text-xs font-medium border cursor-pointer transition-all"
+              style={{
+                color: '#C59B27',
+                borderColor: 'rgba(197,155,39,0.35)',
+                background: 'rgba(197,155,39,0.06)',
+              }}
+              whileHover={{ scale: 1.04, background: 'rgba(197,155,39,0.12)' } as any}
+              whileTap={{ scale: 0.96 }}
+              aria-label="Share this website"
+              id="footer-share-btn"
+            >
+              <Share2 size={13} />
+              Share this site
+            </motion.button>
+
             {/* Back to Top */}
             <motion.button
               onClick={() => smoothScrollTo('#hero')}
@@ -136,6 +156,9 @@ const Footer: React.FC = () => {
           </p>
         </div>
       </Container>
+
+      {/* Share Modal */}
+      <ShareModal isOpen={shareOpen} onClose={() => setShareOpen(false)} />
     </footer>
   );
 };

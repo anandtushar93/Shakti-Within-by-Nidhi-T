@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+
+# Disallow admin or private paths
+Disallow: /admin/
+Disallow: /private/
+
+# Sitemap
+Sitemap: https://shaktiwithin.com/sitemap.xml
+
+# Crawl-delay for respectful crawling
+Crawl-delay: 10

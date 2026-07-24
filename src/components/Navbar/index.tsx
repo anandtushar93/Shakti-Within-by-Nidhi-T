@@ -1,16 +1,18 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Share2 } from 'lucide-react';
 import { NAV_LINKS, BRAND } from '../../constants';
 import { useNavbarScroll } from '../../hooks';
 import { smoothScrollTo } from '../../utils';
 import Container from '../Shared/Container';
+import ShareModal from '../Shared/ShareModal';
 
 // ─── Navbar Component ─────────────────────────────────────────────────────────
 const Navbar: React.FC = () => {
   const scrolled = useNavbarScroll();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeLink, setActiveLink] = useState('');
+  const [shareOpen, setShareOpen] = useState(false);
 
   const handleNavClick = (href: string) => {
     setActiveLink(href);
@@ -82,8 +84,26 @@ const Navbar: React.FC = () => {
             ))}
           </div>
 
-          {/* CTA + Mobile Hamburger */}
-          <div className="flex items-center gap-4">
+          {/* CTA + Share + Mobile Hamburger */}
+          <div className="flex items-center gap-3">
+            {/* Share Button – desktop */}
+            <motion.button
+              onClick={() => setShareOpen(true)}
+              className="hidden sm:flex items-center gap-1.5 px-3.5 py-2 rounded-xl font-body text-sm font-medium transition-all cursor-pointer border"
+              style={{
+                color: '#C59B27',
+                borderColor: 'rgba(197,155,39,0.35)',
+                background: 'rgba(197,155,39,0.06)',
+              }}
+              whileHover={{ scale: 1.04, background: 'rgba(197,155,39,0.12)' } as any}
+              whileTap={{ scale: 0.96 }}
+              aria-label="Share Shakti Within"
+              id="navbar-share-btn"
+            >
+              <Share2 size={14} />
+              Share
+            </motion.button>
+
             <motion.a
               href={BRAND.whatsapp}
               target="_blank"
@@ -162,11 +182,29 @@ const Navbar: React.FC = () => {
               ))}
             </nav>
 
+            {/* Mobile Share Button */}
+            <motion.button
+              onClick={() => { setMobileOpen(false); setShareOpen(true); }}
+              className="flex items-center justify-center gap-2 py-3 rounded-xl font-body text-sm font-medium mt-3 cursor-pointer border"
+              style={{
+                color: '#C59B27',
+                borderColor: 'rgba(197,155,39,0.4)',
+                background: 'rgba(197,155,39,0.08)',
+              }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.25 }}
+              id="mobile-share-btn"
+            >
+              <Share2 size={15} />
+              Share This Website
+            </motion.button>
+
             <motion.a
               href={BRAND.whatsapp}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-primary text-center mt-6"
+              className="btn-primary text-center mt-3"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
@@ -194,6 +232,9 @@ const Navbar: React.FC = () => {
           />
         )}
       </AnimatePresence>
+
+      {/* Share Modal */}
+      <ShareModal isOpen={shareOpen} onClose={() => setShareOpen(false)} />
     </>
   );
 };

@@ -53,7 +53,7 @@ const EventDetailModal: React.FC<EventDetailModalProps> = ({ event, onClose }) =
         aria-label={`Event details for ${event.title}`}
       >
         <motion.div
-          className="relative w-full max-w-2xl bg-gradient-to-b from-[#1C1610] via-[#241D15] to-[#17120C] rounded-3xl border border-[#C59B27]/40 shadow-[0_25px_80px_rgba(0,0,0,0.85),0_0_50px_rgba(197,155,39,0.2)] overflow-hidden my-8 text-white"
+          className="relative w-full max-w-2xl bg-gradient-to-b from-[#1C1610] via-[#241D15] to-[#17120C] rounded-3xl border border-[#C59B27]/40 shadow-[0_25px_80px_rgba(0,0,0,0.85),0_0_50px_rgba(197,155,39,0.2)] overflow-hidden mt-24 sm:mt-20 text-white"
           initial={{ scale: 0.9, y: 20, opacity: 0 }}
           animate={{ scale: 1, y: 0, opacity: 1 }}
           exit={{ scale: 0.9, y: 20, opacity: 0 }}
@@ -61,7 +61,7 @@ const EventDetailModal: React.FC<EventDetailModalProps> = ({ event, onClose }) =
           onClick={(e) => e.stopPropagation()}
         >
           {/* Header Banner */}
-          <div className="relative p-6 sm:p-8 bg-gradient-to-br from-[#120E0A] via-[#2A2016] to-[#4A3719] text-white border-b border-[#C59B27]/30 overflow-hidden">
+          <div className="relative p-4 sm:p-8 bg-gradient-to-br from-[#120E0A] via-[#2A2016] to-[#4A3719] text-white border-b border-[#C59B27]/30 overflow-hidden">
             <div className="absolute top-0 right-0 w-72 h-72 bg-[#E6B85C]/15 rounded-full blur-3xl pointer-events-none" />
 
             {/* Category Pill & Close Button */}
@@ -99,7 +99,7 @@ const EventDetailModal: React.FC<EventDetailModalProps> = ({ event, onClose }) =
           </div>
 
           {/* Body Content */}
-          <div className="p-6 sm:p-8 space-y-6 max-h-[68vh] overflow-y-auto custom-scrollbar">
+          <div className="p-4 sm:p-8 space-y-6 max-h-[65vh] overflow-y-auto custom-scrollbar">
             {/* Overview / Description */}
             <div className="bg-white/5 rounded-2xl p-5 border border-[#C59B27]/30 backdrop-blur-md">
               <p className="font-body text-sm sm:text-base text-white/90 leading-relaxed italic">

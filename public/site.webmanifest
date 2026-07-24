@@ -1,0 +1,36 @@
+{
+  "name": "Shakti Within",
+  "short_name": "ShaktiWithin",
+  "description": "Tarot, Numerology & Spiritual Guidance by Nidhi T. Reconnect. Realign. Rise.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#201A15",
+  "theme_color": "#C59B27",
+  "orientation": "portrait-primary",
+  "lang": "en-IN",
+  "categories": ["lifestyle", "health", "wellness"],
+  "icons": [
+    {
+      "src": "/logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/og-image.jpg",
+      "sizes": "1200x630",
+      "type": "image/jpeg",
+      "label": "Shakti Within Homepage"
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false
+}
