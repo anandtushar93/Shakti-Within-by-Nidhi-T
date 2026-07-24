@@ -321,7 +321,7 @@ const Hero: React.FC = () => {
           {/* Interactive Scroll to Explore Button */}
           <motion.button
             onClick={() => smoothScrollTo('#services')}
-            className="flex flex-col items-center gap-1.5 mt-14 mx-auto cursor-pointer group focus:outline-none"
+            className="flex flex-col items-center gap-1.5 mt-14 mb-2 mx-auto cursor-pointer group focus:outline-none"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1.2, duration: 0.5 }}

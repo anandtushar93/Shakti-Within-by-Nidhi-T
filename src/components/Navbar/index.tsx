@@ -27,8 +27,8 @@ const Navbar: React.FC = () => {
         transition={{ duration: 0.6, ease: 'easeOut' }}
         className={`fixed top-0 left-0 right-0 z-[900] transition-all duration-500 ${
           scrolled
-            ? 'glass shadow-md py-3'
-            : 'bg-transparent py-3'
+            ? 'glass shadow-md py-1'
+            : 'bg-transparent py-1'
         }`}
       >
         <Container className="flex items-center justify-between">
@@ -46,7 +46,7 @@ const Navbar: React.FC = () => {
               <img
                 src="/logo.png"
                 alt="Shakti Within by Nidhi T"
-                className="h-10 sm:h-16 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+                className="h-16 sm:h-20 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
               />
             </div>
             <div>
