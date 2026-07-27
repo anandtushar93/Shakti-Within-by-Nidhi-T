@@ -81,6 +81,22 @@ export const SERVICES: Service[] = [
     color: 'from-orange-400/10 to-amber-400/5',
     glowColor: 'rgba(251, 146, 60, 0.15)',
   },
+  {
+    id: 'pendulum',
+    emoji: '🔱',
+    title: 'Pendulum Reading',
+    description: 'Harness the subtle energy of a pendulum to receive clear yes/no answers and deeper intuitive guidance on life\'s most important questions.',
+    color: 'from-cyan-400/10 to-sky-400/5',
+    glowColor: 'rgba(34, 211, 238, 0.15)',
+  },
+  {
+    id: 'oracle',
+    emoji: '🌟',
+    title: 'Oracle Reading',
+    description: 'Connect with divine wisdom through sacred oracle cards, channeling uplifting messages and spiritual insights to illuminate your path forward.',
+    color: 'from-yellow-400/10 to-orange-300/5',
+    glowColor: 'rgba(251, 191, 36, 0.15)',
+  },
 ];
 
 // ─── Why Choose Me Data ───────────────────────────────────────────────────────

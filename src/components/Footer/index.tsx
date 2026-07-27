@@ -90,7 +90,7 @@ const Footer: React.FC = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-9 h-9 rounded-full bg-[#E1306C]/10 flex items-center justify-center hover:bg-[#E1306C]/20 transition-colors"
-                aria-label="Instagram - WorthyOfYou"
+                aria-label="Instagram - ShaktiWithin by Nidhi"
               >
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E1306C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                   <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
@@ -105,7 +105,7 @@ const Footer: React.FC = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-9 h-9 rounded-full bg-[#0077B5]/10 flex items-center justify-center hover:bg-[#0077B5]/20 transition-colors"
-                aria-label="LinkedIn - WorthyOfYou"
+                aria-label="LinkedIn - Nidhi T"
               >
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="#0077B5" aria-hidden="true">
                   <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
@@ -120,7 +120,7 @@ const Footer: React.FC = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-9 h-9 rounded-full bg-[#FF0000]/10 flex items-center justify-center hover:bg-[#FF0000]/20 transition-colors"
-                aria-label="YouTube - WorthyOfYou"
+                aria-label="YouTube - ShaktiWithin by Nidhi"
               >
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FF0000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                   <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/>

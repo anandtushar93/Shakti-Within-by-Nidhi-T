@@ -8,11 +8,11 @@ export const BRAND = {
   phone: '9899689394',
   phoneFormatted: '+91 9899 689 394',
   whatsapp: 'https://wa.me/919899689394',
-  instagram: 'https://www.instagram.com/worthyofyou',
-  linkedin: 'https://www.linkedin.com/in/worthyofyou',
-  youtube: 'https://youtube.com/@worthyofyou',
+  instagram: 'https://www.instagram.com/shaktiwithinbynidhi?igsh=MXc5NXVhcjlkeDhxNg%3D%3D&utm_source=qr',
+  linkedin: 'https://www.linkedin.com/in/nidhi-t-17520611a?utm_source=share_via&utm_content=profile&utm_medium=member_ios',
+  youtube: 'https://youtube.com/@shaktiwithinbynidhi?si=HolJH54lrNsGC57g',
   calendly: 'https://calendly.com/shaktiwithin',
-  email: 'nidhi@shaktiwithin.com',
+  email: 'nidhi.0514@gmail.com',
   website: 'https://shaktiwithin.netlify.app/',
 };
 

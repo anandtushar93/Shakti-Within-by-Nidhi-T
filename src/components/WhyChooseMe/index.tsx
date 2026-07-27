@@ -7,7 +7,7 @@ import { STAGGER_CONTAINER, FADE_UP } from '../../constants';
 import Container from '../Shared/Container';
 
 // ─── Why Card ─────────────────────────────────────────────────────────────────
-const WhyCard: React.FC<{ point: typeof WHY_POINTS[0]; index: number }> = ({ point, index }) => {
+const WhyCard: React.FC<{ point: typeof WHY_POINTS[0]; index: number }> = ({ point, index: _index }) => {
   return (
     <motion.article
       variants={FADE_UP}

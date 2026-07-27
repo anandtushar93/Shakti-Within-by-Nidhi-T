@@ -72,7 +72,7 @@ const Contact: React.FC = () => {
 
   // Form State & Validation
   const [name, setName] = useState('');
-  const [service, setService] = useState('');
+  const [service] = useState(''); // service selected via WhatsApp message
   const [message, setMessage] = useState('');
   const [errors, setErrors] = useState<{ name?: string; message?: string }>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -168,7 +168,7 @@ const Contact: React.FC = () => {
               <ContactCard
                 icon={<InstagramIcon />}
                 label="Instagram"
-                value="@WorthyOfYou"
+                value="@shaktiwithinbynidhi"
                 href={BRAND.instagram}
                 color="#E1306C"
                 external
@@ -179,7 +179,7 @@ const Contact: React.FC = () => {
               <ContactCard
                 icon={<LinkedinIcon />}
                 label="LinkedIn"
-                value="WorthyOfYou"
+                value="Nidhi T"
                 href={BRAND.linkedin}
                 color="#0077B5"
                 external
@@ -190,7 +190,7 @@ const Contact: React.FC = () => {
               <ContactCard
                 icon={<YoutubeIcon />}
                 label="YouTube"
-                value="WorthyOfYou"
+                value="ShaktiWithin by Nidhi"
                 href={BRAND.youtube}
                 color="#FF0000"
                 external

@@ -1,8 +1,8 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
+
 import { X, Star } from 'lucide-react';
-import { TESTIMONIALS, TESTIMONIAL_CATEGORIES, type Testimonial } from '../../data';
+import type { Testimonial } from '../../data';
 import SectionHeader from '../Shared/SectionHeader';
 import { useLockScroll } from '../../hooks';
 import Container from '../Shared/Container';
@@ -20,54 +20,6 @@ const StarRating: React.FC<{ rating: number }> = ({ rating }) => (
     ))}
   </div>
 );
-
-// ─── Testimonial Card (Text) ──────────────────────────────────────────────────
-const TestimonialCard: React.FC<{ testimonial: Testimonial; index: number; onClick: (t: Testimonial) => void }> = ({
-  testimonial,
-  index,
-  onClick,
-}) => {
-  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
-
-  return (
-    <motion.article
-      ref={ref}
-      initial={{ opacity: 0, y: 30 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.5, delay: (index % 3) * 0.1 }}
-      className="masonry-item group glass-card rounded-3xl p-7 card-hover cursor-pointer border border-[#C59B27]/16 flex flex-col justify-between"
-      onClick={() => onClick(testimonial)}
-      role="button"
-      tabIndex={0}
-      aria-label={`Read testimonial from ${testimonial.name}`}
-      onKeyDown={(e) => e.key === 'Enter' && onClick(testimonial)}
-    >
-      <div>
-        <div className="flex items-center justify-between mb-4">
-          <StarRating rating={testimonial.rating} />
-          <span className="inline-flex items-center px-2.5 py-0.5 bg-[#FAF6EE] border border-[#C59B27]/20 rounded-full text-[10px] font-body font-semibold text-[#C59B27] capitalize">
-            {testimonial.category}
-          </span>
-        </div>
-        
-        <p className="font-body text-sm text-[#383026] leading-relaxed mb-6 italic">
-          "{testimonial.quote}"
-        </p>
-      </div>
-
-      {/* Author */}
-      <div className="flex items-center gap-3 border-t border-[#EFE5D3] pt-4 mt-auto">
-        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#C59B27] to-[#E6B85C] flex items-center justify-center text-[#201A15] font-heading font-semibold text-base flex-shrink-0 shadow-2xs">
-          {testimonial.name.charAt(0)}
-        </div>
-        <div>
-          <p className="font-heading text-base font-semibold text-[#201A15]">{testimonial.name}</p>
-          <p className="font-body text-xs text-[#685F52]">{testimonial.role}</p>
-        </div>
-      </div>
-    </motion.article>
-  );
-};
 
 // ─── Lightbox ─────────────────────────────────────────────────────────────────
 const Lightbox: React.FC<{
@@ -138,15 +90,8 @@ const Lightbox: React.FC<{
 
 // ─── Testimonials Section ─────────────────────────────────────────────────────
 const Testimonials: React.FC = () => {
-  const [activeCategory, setActiveCategory] = useState('all');
   const [lightboxItem, setLightboxItem] = useState<Testimonial | string | null>(null);
-
-  const filtered = activeCategory === 'all'
-    ? TESTIMONIALS
-    : TESTIMONIALS.filter((t) => t.category === activeCategory);
-
-  const handleTextClick = useCallback((t: Testimonial) => setLightboxItem(t), []);
-  const handleClose = useCallback(() => setLightboxItem(null), []);
+  const handleClose = () => setLightboxItem(null);
 
   return (
     <>
