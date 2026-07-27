@@ -64,11 +64,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* ─── Custom Cursor ────────────────────────────────── */
-* {
-  cursor: none !important;
-}
-
 /* ─── Scrollbar Styling ────────────────────────────── */
 ::-webkit-scrollbar {
   width: 7px;
@@ -140,7 +135,7 @@ body {
   padding: 14px 32px;
   border-radius: 50px;
   border: none;
-  cursor: none;
+  cursor: pointer;
   position: relative;
   overflow: hidden;
   transition: all 0.3s ease;
@@ -168,7 +163,7 @@ body {
   padding: 14px 32px;
   border-radius: 50px;
   border: none;
-  cursor: none;
+  cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 4px 20px rgba(230, 184, 92, 0.35);
 }
@@ -186,7 +181,7 @@ body {
   padding: 13px 31px;
   border-radius: 50px;
   border: 1.5px solid #C59B27;
-  cursor: none;
+  cursor: pointer;
   transition: all 0.3s ease;
 }
 

@@ -21,12 +21,12 @@ const WhyCard: React.FC<{ point: typeof WHY_POINTS[0]; index: number }> = ({ poi
       />
       
       {/* Animated accent dot */}
-      <motion.div
+      {/* <motion.div
         className="absolute top-4 right-4 w-7 h-7 rounded-full bg-[#FAF6EE] border border-[#C59B27]/25 flex items-center justify-center shadow-2xs"
         whileHover={{ scale: 1.1 }}
       >
         <span className="font-body text-[11px] font-bold text-[#C59B27]">0{index + 1}</span>
-      </motion.div>
+      </motion.div> */}
 
       <div className="relative z-10 flex-1 flex flex-col justify-between pt-2">
         <div>

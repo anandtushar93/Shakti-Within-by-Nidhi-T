@@ -10,9 +10,10 @@ export const BRAND = {
   whatsapp: 'https://wa.me/919899689394',
   instagram: 'https://www.instagram.com/worthyofyou',
   linkedin: 'https://www.linkedin.com/in/worthyofyou',
+  youtube: 'https://youtube.com/@worthyofyou',
   calendly: 'https://calendly.com/shaktiwithin',
   email: 'nidhi@shaktiwithin.com',
-  website: 'https://shaktiwithin.com',
+  website: 'https://shaktiwithin.netlify.app/',
 };
 
 // ─── Color Palette (Extracted directly from Gold & Cream Logo) ─────────────────
@@ -32,7 +33,7 @@ export const COLORS = {
 export const NAV_LINKS = [
   { label: 'Services', href: '#services' },
   { label: 'About', href: '#about' },
-  { label: 'Why Me', href: '#why-choose-me' },
+  { label: 'Why Choose Me', href: '#why-choose-me' },
   { label: 'Testimonials', href: '#testimonials' },
   { label: 'FAQ', href: '#faq' },
   { label: 'Contact', href: '#contact' },

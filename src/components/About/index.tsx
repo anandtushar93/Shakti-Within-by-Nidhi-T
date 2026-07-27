@@ -103,7 +103,7 @@ const About: React.FC = () => {
                 animate={{ y: [0, -6, 0] }}
                 transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
               >
-                <p className="font-heading text-3xl font-semibold gradient-text">5+</p>
+                <p className="font-heading text-3xl font-semibold gradient-text">6+</p>
                 <p className="font-body text-xs text-[#685F52] mt-0.5">Years Experience</p>
               </motion.div>
 
@@ -164,12 +164,12 @@ const About: React.FC = () => {
               {[
                 {
                   icon: '🌟',
-                  title: 'Our Mission',
+                  title: 'My Mission',
                   text: 'To empower every individual with clarity, wisdom, and the courage to walk their highest path—one reading at a time.',
                 },
                 {
                   icon: '🔮',
-                  title: 'Our Vision',
+                  title: 'My Vision',
                   text: "A world where every person trusts their inner wisdom and lives in alignment with their soul's deepest calling.",
                 },
                 {

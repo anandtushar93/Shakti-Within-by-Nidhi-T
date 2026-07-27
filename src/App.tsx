@@ -5,7 +5,6 @@ import './index.css';
 // ─── Component Imports ────────────────────────────────────────────────────────
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
-import CustomCursor from './components/Shared/CustomCursor';
 import FloatingWhatsApp from './components/Shared/FloatingWhatsApp';
 
 // ─── Lazy Loaded Sections (code splitting) ────────────────────────────────────
@@ -41,9 +40,6 @@ const App: React.FC = () => {
 
   return (
     <>
-      {/* Custom Cursor */}
-      <CustomCursor />
-
       {/* Scroll Progress Bar */}
       <motion.div
         className="scroll-progress"

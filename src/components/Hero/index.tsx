@@ -230,23 +230,29 @@ const Hero: React.FC = () => {
                 </motion.button>
               </motion.div>
 
-              {/* Trust Badges */}
+              {/* Premium WorthyOfYou Link */}
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 1.0, duration: 0.7 }}
-                className="flex flex-wrap items-center justify-center lg:justify-start gap-6 pt-2"
+                className="pt-2 flex flex-col items-center lg:items-start"
               >
-                {[
-                  { icon: '🌟', text: '500+ Happy Clients' },
-                  { icon: '🔒', text: '100% Confidential' },
-                  { icon: '💫', text: '5+ Years Experience' },
-                ].map((badge) => (
-                  <div key={badge.text} className="flex items-center gap-2 bg-white/50 border border-[#EFE5D3] px-3.5 py-1.5 rounded-full shadow-2xs">
-                    <span className="text-sm">{badge.icon}</span>
-                    <span className="font-body text-xs text-[#685F52] font-medium">{badge.text}</span>
-                  </div>
-                ))}
+                <p className="font-body text-xs sm:text-sm text-[#685F52] mb-3 font-medium">
+                  Discover more premium offerings at
+                </p>
+                <a
+                  href="https://worthyofyou.in/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group relative inline-flex items-center gap-3 bg-gradient-to-r from-[#FFFDF9] to-[#FAF6EE] border border-[#C59B27]/40 px-6 py-3 rounded-full shadow-[0_4px_20px_rgba(197,155,39,0.15)] hover:shadow-[0_8px_30px_rgba(197,155,39,0.25)] transition-all duration-300 overflow-hidden"
+                >
+                  <div className="absolute inset-0 bg-gradient-to-r from-[#C59B27]/0 via-[#C59B27]/10 to-[#C59B27]/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 translate-x-[-100%] group-hover:translate-x-[100%] z-0" />
+                  <Sparkles size={16} className="text-[#C59B27] relative z-10" />
+                  <span className="font-heading text-sm sm:text-base font-semibold text-[#201A15] group-hover:text-[#C59B27] transition-colors relative z-10">
+                    worthyofyou.in
+                  </span>
+                  <span className="text-[#C59B27] group-hover:translate-x-1 transition-transform relative z-10">→</span>
+                </a>
               </motion.div>
             </div>
 
@@ -312,7 +318,7 @@ const Hero: React.FC = () => {
                 >
                   <div className="w-2 h-2 rounded-full bg-[#C59B27] animate-pulse" />
                   <span className="font-body text-xs sm:text-sm font-semibold text-[#201A15]">Nidhi T</span>
-                  <span className="font-body text-xs text-[#685F52]">• Spiritual Guide</span>
+                  {/* <span className="font-body text-xs text-[#685F52]">• Spiritual Guide</span> */}
                 </motion.div>
               </div>
             </div>

@@ -167,7 +167,7 @@ const Testimonials: React.FC = () => {
           />
 
           {/* Category Filter */}
-          <div className="flex flex-wrap justify-center gap-3 mb-14" role="tablist" aria-label="Filter testimonials by category">
+          {/* <div className="flex flex-wrap justify-center gap-3 mb-14" role="tablist" aria-label="Filter testimonials by category">
             {TESTIMONIAL_CATEGORIES.map((cat) => (
               <motion.button
                 key={cat.value}
@@ -185,10 +185,10 @@ const Testimonials: React.FC = () => {
                 {cat.label}
               </motion.button>
             ))}
-          </div>
+          </div> */}
 
           {/* Masonry Grid - Text Testimonials */}
-          <AnimatePresence mode="wait">
+          {/* <AnimatePresence mode="wait">
             <motion.div
               key={activeCategory}
               initial={{ opacity: 0 }}
@@ -206,24 +206,24 @@ const Testimonials: React.FC = () => {
                 />
               ))}
             </motion.div>
-          </AnimatePresence>
+          </AnimatePresence> */}
 
           {/* Client Screenshot Gallery Slider (Swiper Slider) */}
-          <div className="mt-20">
-            <div className="text-center mb-6">
+          <div className="mt-0">
+            {/* <div className="text-center mb-6">
               <h3 className="font-heading text-3xl sm:text-4xl font-semibold text-[#201A15]">
                 Verified Client <span className="gradient-text italic">Reviews & Chat Screenshots</span>
               </h3>
               <p className="font-body text-sm text-[#685F52] mt-2">
                 Real feedback from real clients — Swipe to explore
               </p>
-            </div>
+            </div> */}
 
             <ClientScreenshotGallery />
           </div>
 
           {/* Bottom CTA */}
-          <motion.div
+          {/* <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -244,7 +244,7 @@ const Testimonials: React.FC = () => {
             >
               ✨ Book Your Session Today
             </motion.a>
-          </motion.div>
+          </motion.div> */}
         </Container>
       </section>
 

@@ -11,7 +11,7 @@ export interface Service {
 export const SERVICES: Service[] = [
   {
     id: 'tarot',
-    emoji: '✨',
+    emoji: '🔮',
     title: 'Tarot Readings',
     description: 'Gain deep clarity and insight into your life\'s journey through intuitive tarot card readings tailored specifically for your unique situation.',
     color: 'from-violet-500/10 to-purple-500/5',
@@ -43,7 +43,7 @@ export const SERVICES: Service[] = [
   },
   {
     id: 'switchwords',
-    emoji: '🔮',
+    emoji: '✨',
     title: 'Switchwords',
     description: 'Harness the power of ancient and modern switch words to shift your energy, attract abundance, and manifest your deepest desires.',
     color: 'from-teal-400/10 to-cyan-400/5',
@@ -262,8 +262,8 @@ export interface Stat {
 }
 
 export const STATS: Stat[] = [
-  { id: '1', value: 500, suffix: '+', label: 'Happy Clients' },
-  { id: '2', value: 5, suffix: '+', label: 'Years Experience' },
-  { id: '3', value: 1000, suffix: '+', label: 'Sessions Completed' },
-  { id: '4', value: 98, suffix: '%', label: 'Client Satisfaction' },
+  { id: '1', value: 5, suffix: 'K', label: 'Happy Clients' },
+  { id: '2', value: 6, suffix: '+', label: 'Years Experience' },
+  // { id: '3', value: 1000, suffix: '+', label: 'Sessions Completed' },
+  { id: '4', value: 100, suffix: '%', label: 'Trusted By Clients' },
 ];

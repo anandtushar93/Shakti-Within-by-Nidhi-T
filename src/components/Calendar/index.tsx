@@ -4,7 +4,6 @@ import { ChevronLeft, ChevronRight, Calendar as CalendarIcon, Sparkles, Star, Ar
 import { COSMIC_EVENTS, MONTH_NAMES, CATEGORY_META } from '../../data/cosmicEvents';
 import type { CosmicEvent } from '../../data/cosmicEvents';
 import Container from '../Shared/Container';
-import EventDetailModal from './EventDetailModal';
 
 // Available months in dataset (July 2026 to November 2026)
 const AVAILABLE_MONTHS = [
@@ -430,11 +429,6 @@ const CosmicCalendar: React.FC = () => {
         </div>
       </Container>
 
-      {/* Event Detail Modal Popup */}
-      <EventDetailModal
-        event={selectedEvent}
-        onClose={() => setSelectedEvent(null)}
-      />
     </section>
   );
 };
