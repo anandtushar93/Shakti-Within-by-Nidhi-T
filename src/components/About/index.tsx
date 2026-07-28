@@ -91,7 +91,7 @@ const About: React.FC = () => {
                 <img
                   src="/nidhi-profile.png"
                   alt="Nidhi T - Founder of Shakti Within"
-                  className="w-full h-full object-cover"
+                  className="w-full object-cover"
                   loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#201A15]/15 via-transparent to-transparent" />
