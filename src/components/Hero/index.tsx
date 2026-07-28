@@ -238,7 +238,7 @@ const Hero: React.FC = () => {
                 className="pt-2 flex flex-col items-center lg:items-start"
               >
                 <p className="font-body text-xs sm:text-sm text-[#685F52] mb-3 font-medium">
-                  Discover more premium offerings at
+                  Discover your August 2026 oracle message for all 12 zodiac signs. Gain insight into love, career, finances, and spiritual guidance this month.
                 </p>
                 <a
                   href="https://worthyofyou.in/"
@@ -287,9 +287,9 @@ const Hero: React.FC = () => {
                   }}
                 >
                   <img
-                    src="/nidhi-profile.png"
+                    src="/nidhi-profile.jpeg"
                     alt="Nidhi T - Spiritual Guide & Tarot Reader at Shakti Within"
-                    className="w-full h-full object-cover"
+                    className="w-full object-cover top-0"
                     loading="eager"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#201A15]/20 via-transparent to-transparent" />
