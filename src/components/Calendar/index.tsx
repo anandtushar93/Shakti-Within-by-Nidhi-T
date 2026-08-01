@@ -1,77 +1,11 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Calendar as CalendarIcon, Sparkles, ExternalLink, BookOpen } from 'lucide-react';
 import { COSMIC_EVENTS, MONTH_NAMES, CATEGORY_META } from '../../data/cosmicEvents';
+import { useLatestBlog } from '../../hooks';
 import Container from '../Shared/Container';
 
-// ─── Blog Post Fetcher Hook ───────────────────────────────────────────────────
-interface BlogPost {
-  title: string;
-  link: string;
-  date: string;
-  category: string;
-  description: string;
-  image: string;
-}
 
-// Static fallback (latest post from RSS at build time)
-const FALLBACK_POST: BlogPost = {
-  title: 'Unlocking April 2026: Oracle Messages for Love, Career & Inner Guidance',
-  link: 'https://worthyofyou.in/unlocking-april-2026-oracle-messages-for-love-career-inner-guidance/',
-  date: 'April 24, 2026',
-  category: 'Tarot Reading',
-  description: 'May this cosmic message find you at the perfect moment. Trust that what you\'ve been drawn to read is not by chance — your intuition has guided you here. Take what resonates, and allow these oracle cards to gently illuminate your path forward.',
-  image: 'https://worthyofyou.in/wp-content/uploads/2026/04/5551661-scaled.jpg',
-};
-
-function useBlogPost() {
-  const [post, setPost] = useState<BlogPost>(FALLBACK_POST);
-
-  useEffect(() => {
-    // Fetch via allorigins CORS proxy
-    const rssUrl = encodeURIComponent('https://worthyofyou.in/feed/');
-    fetch(`https://api.allorigins.win/get?url=${rssUrl}`)
-      .then((r) => r.json())
-      .then((data) => {
-        const parser = new DOMParser();
-        const xml = parser.parseFromString(data.contents, 'text/xml');
-        const item = xml.querySelector('item');
-        if (!item) return;
-
-        const rawTitle = item.querySelector('title')?.textContent ?? '';
-        const link = item.querySelector('link')?.textContent ?? FALLBACK_POST.link;
-        const pubDate = item.querySelector('pubDate')?.textContent ?? '';
-        const category = item.querySelector('category')?.textContent ?? 'Blog';
-        const desc = item.querySelector('description')?.textContent ?? '';
-
-        // Strip HTML tags from description
-        const tmp = document.createElement('div');
-        tmp.innerHTML = desc;
-        const cleanDesc = (tmp.textContent ?? '').replace(/The post.*appeared first.*$/s, '').trim().slice(0, 200);
-
-        // Try to pull image from content:encoded
-        const content = item.getElementsByTagNameNS('http://purl.org/rss/1.0/modules/content/', 'encoded')[0]?.textContent ?? '';
-        const imgMatch = content.match(/<img[^>]+src=["']([^"']+)["']/i);
-        const image = imgMatch?.[1] ?? FALLBACK_POST.image;
-
-        const dateFormatted = pubDate
-          ? new Date(pubDate).toLocaleDateString('en-IN', { year: 'numeric', month: 'long', day: 'numeric' })
-          : FALLBACK_POST.date;
-
-        setPost({
-          title: rawTitle.replace(/&#038;/g, '&').replace(/&amp;/g, '&'),
-          link,
-          date: dateFormatted,
-          category,
-          description: cleanDesc || FALLBACK_POST.description,
-          image,
-        });
-      })
-      .catch(() => {}); // silently use fallback
-  }, []);
-
-  return post;
-}
 
 // Available months in dataset (July 2026 to November 2026)
 const AVAILABLE_MONTHS = [
@@ -135,7 +69,7 @@ const EventTooltip: React.FC<{ title: string; description: string; badgeIcon: st
 const CosmicCalendar: React.FC = () => {
   const [activeMonthIndex, setActiveMonthIndex] = useState(0);
   const [hoveredDate, setHoveredDate] = useState<string | null>(null);
-  const latestPost = useBlogPost();
+  const { post: latestPost, loading: blogLoading, error: blogError } = useLatestBlog();
 
   const currentMonthInfo = AVAILABLE_MONTHS[activeMonthIndex];
   const { year, month } = currentMonthInfo;
@@ -437,76 +371,118 @@ const CosmicCalendar: React.FC = () => {
             <div className="absolute top-0 right-0 w-56 h-56 bg-[#C59B27]/15 rounded-full blur-3xl pointer-events-none" />
             <div className="absolute bottom-0 left-0 w-40 h-40 bg-[#8A5CF5]/10 rounded-full blur-3xl pointer-events-none" />
 
-            <div className="relative z-10 flex flex-col sm:flex-row gap-0 overflow-hidden rounded-3xl">
-              {/* Blog Thumbnail */}
-              <div className="sm:w-2/5 h-52 sm:h-auto flex-shrink-0 relative overflow-hidden">
-                <img
-                  src={latestPost.image}
-                  alt={latestPost.title}
-                  className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
-                  loading="lazy"
-                  onError={(e) => { (e.target as HTMLImageElement).src = 'https://worthyofyou.in/wp-content/uploads/2019/06/cropped-WhatsApp-Image-2019-06-24-at-17.34.04-32x32.jpeg'; }}
-                />
-                {/* Image overlay */}
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-[#1A130B]/80 hidden sm:block" />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#1A130B]/80 via-transparent to-transparent sm:hidden" />
+            {/* ── Loading Skeleton ── */}
+            {blogLoading && (
+              <div className="relative z-10 flex flex-col sm:flex-row gap-0 overflow-hidden rounded-3xl animate-pulse">
+                <div className="sm:w-2/5 h-52 sm:h-64 flex-shrink-0 bg-white/8" />
+                <div className="flex-1 p-6 sm:p-8 flex flex-col gap-4">
+                  <div className="flex gap-3">
+                    <div className="h-6 w-44 rounded-full bg-white/10" />
+                    <div className="h-6 w-20 rounded-full bg-white/8" />
+                  </div>
+                  <div className="h-4 w-24 rounded-full bg-white/8" />
+                  <div className="h-6 w-3/4 rounded-lg bg-white/10" />
+                  <div className="h-4 w-full rounded-lg bg-white/8" />
+                  <div className="h-4 w-5/6 rounded-lg bg-white/8" />
+                  <div className="mt-2 flex gap-3">
+                    <div className="h-10 w-36 rounded-full bg-[#C59B27]/20" />
+                    <div className="h-10 w-28 rounded-full bg-white/8" />
+                  </div>
+                </div>
               </div>
+            )}
 
-              {/* Blog Content */}
-              <div className="flex-1 p-6 sm:p-8 flex flex-col justify-between">
-                {/* Top: Label + Date */}
-                <div>
-                  <div className="flex flex-wrap items-center gap-3 mb-4">
-                    <span className="inline-flex items-center gap-1.5 bg-[#C59B27]/20 border border-[#E6B85C]/40 text-[#E6B85C] font-body text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full">
-                      <BookOpen size={11} />
-                      Latest from Worthy of You
+            {/* ── Error State ── */}
+            {blogError && (
+              <div className="relative z-10 p-8 sm:p-12 flex flex-col items-center justify-center gap-4 text-center">
+                <span className="text-3xl">✦</span>
+                <p className="font-heading text-base sm:text-lg text-white/60">
+                  Latest blog is currently unavailable.
+                </p>
+                <a
+                  href="https://worthyofyou.in/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 font-body text-sm text-[#E6B85C] hover:text-white border border-[#E6B85C]/30 hover:border-[#E6B85C] px-5 py-2.5 rounded-full transition-all duration-300"
+                >
+                  <Sparkles size={13} />
+                  Visit worthyofyou.in →
+                </a>
+              </div>
+            )}
+
+            {/* ── Loaded Post ── */}
+            {!blogLoading && !blogError && latestPost && (
+              <div className="relative z-10 flex flex-col sm:flex-row gap-0 overflow-hidden rounded-3xl">
+                {/* Blog Thumbnail */}
+                <div className="sm:w-2/5 h-52 sm:h-auto flex-shrink-0 relative overflow-hidden">
+                  <img
+                    src={latestPost.image}
+                    alt={latestPost.title}
+                    className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+                    loading="lazy"
+                  />
+                  {/* Image overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-[#1A130B]/80 hidden sm:block" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#1A130B]/80 via-transparent to-transparent sm:hidden" />
+                </div>
+
+                {/* Blog Content */}
+                <div className="flex-1 p-6 sm:p-8 flex flex-col justify-between">
+                  {/* Top: Label + Date */}
+                  <div>
+                    <div className="flex flex-wrap items-center gap-3 mb-4">
+                      <span className="inline-flex items-center gap-1.5 bg-[#C59B27]/20 border border-[#E6B85C]/40 text-[#E6B85C] font-body text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full">
+                        <BookOpen size={11} />
+                        Latest from Worthy of You
+                      </span>
+                      <span className="font-body text-[11px] text-white/50">{latestPost.date}</span>
+                    </div>
+
+                    {/* Category pill */}
+                    <span className="inline-block bg-white/8 border border-white/15 text-white/70 font-body text-[10px] px-2.5 py-0.5 rounded-full mb-3">
+                      ✦ {latestPost.category}
                     </span>
-                    <span className="font-body text-[11px] text-white/50">{latestPost.date}</span>
+
+                    {/* Heading */}
+                    <h4 className="font-heading text-lg sm:text-xl lg:text-2xl font-semibold text-white leading-snug mb-3">
+                      {latestPost.title}
+                    </h4>
+
+                    {/* Description */}
+                    <p className="font-body text-sm text-white/70 leading-relaxed line-clamp-3">
+                      {latestPost.description}
+                    </p>
                   </div>
 
-                  {/* Category pill */}
-                  <span className="inline-block bg-white/8 border border-white/15 text-white/70 font-body text-[10px] px-2.5 py-0.5 rounded-full mb-3">
-                    ✦ {latestPost.category}
-                  </span>
+                  {/* Bottom: Buttons */}
+                  <div className="mt-6 flex flex-wrap items-center gap-4">
+                    <a
+                      href={latestPost.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      id="blog-read-btn"
+                      className="group inline-flex items-center gap-2 bg-gradient-to-r from-[#C59B27] to-[#E6B85C] text-[#140F0A] font-heading font-bold text-sm px-6 py-3 rounded-full shadow-[0_4px_20px_rgba(197,155,39,0.35)] hover:shadow-[0_8px_30px_rgba(197,155,39,0.5)] transition-all duration-300 hover:scale-105"
+                    >
+                      <BookOpen size={15} />
+                      Read Full Blog
+                      <ExternalLink size={13} className="opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 transition-transform" />
+                    </a>
 
-                  {/* Heading */}
-                  <h4 className="font-heading text-lg sm:text-xl lg:text-2xl font-semibold text-white leading-snug mb-3">
-                    {latestPost.title}
-                  </h4>
-
-                  {/* Description */}
-                  <p className="font-body text-sm text-white/70 leading-relaxed line-clamp-3">
-                    {latestPost.description}
-                  </p>
-                </div>
-
-                {/* Bottom: Button */}
-                <div className="mt-6 flex flex-wrap items-center gap-4">
-                  <a
-                    href={latestPost.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    id="blog-read-btn"
-                    className="group inline-flex items-center gap-2 bg-gradient-to-r from-[#C59B27] to-[#E6B85C] text-[#140F0A] font-heading font-bold text-sm px-6 py-3 rounded-full shadow-[0_4px_20px_rgba(197,155,39,0.35)] hover:shadow-[0_8px_30px_rgba(197,155,39,0.5)] transition-all duration-300 hover:scale-105"
-                  >
-                    <BookOpen size={15} />
-                    Read Full Blog
-                    <ExternalLink size={13} className="opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 transition-transform" />
-                  </a>
-
-                  <a
-                    href="https://worthyofyou.in/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    id="blog-all-btn"
-                    className="inline-flex items-center gap-1.5 font-body text-sm text-[#E6B85C] hover:text-white border border-[#E6B85C]/30 hover:border-[#E6B85C] px-5 py-3 rounded-full transition-all duration-300"
-                  >
-                    <Sparkles size={13} />
-                    All Blogs →
-                  </a>
+                    <a
+                      href="https://worthyofyou.in/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      id="blog-all-btn"
+                      className="inline-flex items-center gap-1.5 font-body text-sm text-[#E6B85C] hover:text-white border border-[#E6B85C]/30 hover:border-[#E6B85C] px-5 py-3 rounded-full transition-all duration-300"
+                    >
+                      <Sparkles size={13} />
+                      All Blogs →
+                    </a>
+                  </div>
                 </div>
               </div>
-            </div>
+            )}
           </motion.div>
         </div>
       </Container>

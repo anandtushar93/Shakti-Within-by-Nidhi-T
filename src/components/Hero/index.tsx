@@ -1,8 +1,8 @@
 import React from 'react';
 import { motion, useTransform, useScroll } from 'framer-motion';
-import { ChevronDown, Star, Sparkles } from 'lucide-react';
+import { ChevronDown, Star, Sparkles, BookOpen, ExternalLink } from 'lucide-react';
 import { BRAND } from '../../constants';
-import { useMouseParallax } from '../../hooks';
+import { useMouseParallax, useLatestBlog } from '../../hooks';
 import StarBackground, { ConstellationBg } from '../Shared/StarBackground';
 import Container from '../Shared/Container';
 import { smoothScrollTo } from '../../utils';
@@ -112,6 +112,7 @@ const GoldenHalo: React.FC = () => (
 // ─── Hero Section ─────────────────────────────────────────────────────────────
 const Hero: React.FC = () => {
   const mouse = useMouseParallax();
+  const { post: latestPost, loading: blogLoading, error: blogError } = useLatestBlog();
   const { scrollY } = useScroll();
   const y = useTransform(scrollY, [0, 500], [0, 120]);
 
@@ -230,18 +231,25 @@ const Hero: React.FC = () => {
                 </motion.button>
               </motion.div>
 
-              {/* Premium WorthyOfYou Link */}
+              {/* Premium WorthyOfYou Link — powered by WP REST API */}
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 1.0, duration: 0.7 }}
                 className="pt-2 flex flex-col items-center lg:items-start"
               >
-                <p className="font-body text-xs sm:text-sm text-[#685F52] mb-3 font-medium">
-                  Discover your August 2026 oracle message for all 12 zodiac signs. Gain insight into love, career, finances, and spiritual guidance this month.
-                </p>
-                <a
-                  href="https://worthyofyou.in/"
+                {/* Description: skeleton while loading, hidden on error, post excerpt when ready */}
+                {blogLoading && (
+                  <div className="h-4 w-72 rounded-full bg-[#685F52]/20 animate-pulse mb-3" />
+                )}
+                {!blogLoading && !blogError && latestPost && (
+                  <p className="font-body text-xs sm:text-sm text-[#685F52] mb-3 font-medium">
+                    {latestPost.title}
+                  </p>
+                )}
+
+                {/* <a
+                  href={(!blogLoading && !blogError && latestPost?.link) ? latestPost.link : 'https://worthyofyou.in/'}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group relative inline-flex items-center gap-3 bg-gradient-to-r from-[#FFFDF9] to-[#FAF6EE] border border-[#C59B27]/40 px-6 py-3 rounded-full shadow-[0_4px_20px_rgba(197,155,39,0.15)] hover:shadow-[0_8px_30px_rgba(197,155,39,0.25)] transition-all duration-300 overflow-hidden"
@@ -250,8 +258,66 @@ const Hero: React.FC = () => {
                   <Sparkles size={16} className="text-[#C59B27] relative z-10" />
                   <span className="font-heading text-sm sm:text-base font-semibold text-[#201A15] group-hover:text-[#C59B27] transition-colors relative z-10">
                     worthyofyou.in
+                    {(!blogLoading && !blogError && latestPost?.link) ? 
+                    <>
+                      <BookOpen size={15} />
+                      Read Full Blog
+                      <ExternalLink size={13} className="opacity-70 group-hover:opacity-100 group-hover:translate-x-0.5 transition-transform" />
+                    </>
+                     : 
+                     <>
+                      <Sparkles size={13} />
+                      All Blogs →
+                     </>
+                    }
                   </span>
                   <span className="text-[#C59B27] group-hover:translate-x-1 transition-transform relative z-10">→</span>
+                </a> */}
+
+                <a
+                  href={
+                    !blogLoading && !blogError && latestPost?.link
+                      ? latestPost.link
+                      : "https://worthyofyou.in/"
+                  }
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group relative inline-flex items-center gap-3 bg-gradient-to-r from-[#FFFDF9] to-[#FAF6EE] border border-[#C59B27]/40 px-6 py-3 rounded-full shadow-[0_4px_20px_rgba(197,155,39,0.15)] hover:shadow-[0_8px_30px_rgba(197,155,39,0.25)] transition-all duration-300 overflow-hidden"
+                >
+                  <div className="absolute inset-0 bg-gradient-to-r from-[#C59B27]/0 via-[#C59B27]/10 to-[#C59B27]/0 opacity-0 group-hover:opacity-100 transition-all duration-500 -translate-x-full group-hover:translate-x-full" />
+
+                  {(!blogLoading && !blogError && latestPost) ? (
+                    <>
+                      <BookOpen
+                        size={16}
+                        className="text-[#C59B27] relative z-10 flex-shrink-0"
+                      />
+
+                      <span className="font-heading text-sm sm:text-base font-semibold text-[#201A15] group-hover:text-[#C59B27] transition-colors relative z-10">
+                        Read Full Blog
+                      </span>
+
+                      <ExternalLink
+                        size={14}
+                        className="relative z-10 text-[#C59B27] opacity-70 group-hover:opacity-100 group-hover:translate-x-1 transition-all"
+                      />
+                    </>
+                  ) : (
+                    <>
+                      <Sparkles
+                        size={16}
+                        className="text-[#C59B27] relative z-10 flex-shrink-0"
+                      />
+
+                      <span className="font-heading text-sm sm:text-base font-semibold text-[#201A15] group-hover:text-[#C59B27] transition-colors relative z-10">
+                        Visit worthyofyou.in
+                      </span>
+
+                      <span className="relative z-10 text-[#C59B27] group-hover:translate-x-1 transition-transform">
+                        →
+                      </span>
+                    </>
+                  )}
                 </a>
               </motion.div>
             </div>
