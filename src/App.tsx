@@ -1,4 +1,5 @@
 import React, { Suspense, lazy } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { motion, useScroll, useSpring } from 'framer-motion';
 import './index.css';
 
@@ -6,6 +7,10 @@ import './index.css';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import FloatingWhatsApp from './components/Shared/FloatingWhatsApp';
+import BookModal from './components/Shared/BookModal';
+
+// ─── Pages ────────────────────────────────────────────────────────────────────
+const BooksPage = lazy(() => import('./pages/BooksPage'));
 
 // ─── Lazy Loaded Sections (code splitting) ────────────────────────────────────
 const Services = lazy(() => import('./components/Services'));
@@ -33,8 +38,8 @@ const SectionLoader: React.FC = () => (
   </div>
 );
 
-// ─── App Component ────────────────────────────────────────────────────────────
-const App: React.FC = () => {
+// ─── Home Page ────────────────────────────────────────────────────────────────
+const HomePage: React.FC = () => {
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 });
 
@@ -49,6 +54,9 @@ const App: React.FC = () => {
 
       {/* Floating WhatsApp */}
       <FloatingWhatsApp />
+
+      {/* Book Promotional Modal – auto-opens after 3s on home page */}
+      <BookModal />
 
       {/* Main Layout */}
       <div className="min-h-screen bg-[#FFFDF9] flex flex-col w-full overflow-x-hidden">
@@ -89,4 +97,22 @@ const App: React.FC = () => {
   );
 };
 
+// ─── App Component ────────────────────────────────────────────────────────────
+const App: React.FC = () => (
+  <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route
+        path="/books"
+        element={
+          <Suspense fallback={<SectionLoader />}>
+            <BooksPage />
+          </Suspense>
+        }
+      />
+    </Routes>
+  </BrowserRouter>
+);
+
 export default App;
+

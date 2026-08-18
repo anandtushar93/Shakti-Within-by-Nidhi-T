@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion, useTransform, useScroll } from 'framer-motion';
-import { ChevronDown, Star, Sparkles, BookOpen, ExternalLink } from 'lucide-react';
+import { ChevronDown, Star, Sparkles, BookOpen, ExternalLink, Library } from 'lucide-react';
 import { BRAND } from '../../constants';
 import { useMouseParallax, useLatestBlog } from '../../hooks';
 import StarBackground, { ConstellationBg } from '../Shared/StarBackground';
@@ -384,8 +384,23 @@ const Hero: React.FC = () => {
                 >
                   <div className="w-2 h-2 rounded-full bg-[#C59B27] animate-pulse" />
                   <span className="font-body text-xs sm:text-sm font-semibold text-[#201A15]">Nidhi T</span>
-                  {/* <span className="font-body text-xs text-[#685F52]">• Spiritual Guide</span> */}
                 </motion.div>
+
+                {/* View My Books Button */}
+                <motion.a
+                  href="/books"
+                  className="hero-books-btn absolute -bottom-14 left-1/2 -translate-x-1/2 z-30"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 1.1, duration: 0.6 }}
+                  whileHover={{ scale: 1.06 }}
+                  whileTap={{ scale: 0.96 }}
+                  id="hero-books-link"
+                  aria-label="View Nidhi T's Books Collection"
+                >
+                  <Library size={13} />
+                  View My Books
+                </motion.a>
               </div>
             </div>
           </div>
