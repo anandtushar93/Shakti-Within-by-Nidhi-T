@@ -6,7 +6,7 @@ Disallow: /admin/
 Disallow: /private/
 
 # Sitemap
-Sitemap: https://shaktiwithin.com/sitemap.xml
+Sitemap: https://shaktiwithin.netlify.app/sitemap.xml
 
 # Crawl-delay for respectful crawling
 Crawl-delay: 10
