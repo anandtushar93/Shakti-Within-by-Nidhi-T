@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import type { Variants } from 'framer-motion';
 
 // ─── BookModal Component ──────────────────────────────────────────────────────
 const AMAZON_URL =
@@ -40,42 +41,42 @@ const BookModal: React.FC = () => {
   };
 
   // ── Animation Variants ─────────────────────────────────────────────────────
-  const backdropVariants = {
+  const backdropVariants: Variants = {
     hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { duration: 0.4, ease: 'easeOut' } },
-    exit:   { opacity: 0, transition: { duration: 0.3,  ease: 'easeIn'  } },
+    visible: { opacity: 1, transition: { duration: 0.4, ease: 'easeOut' as const } },
+    exit:   { opacity: 0, transition: { duration: 0.3,  ease: 'easeIn'  as const } },
   };
 
-  const modalVariants = {
+  const modalVariants: Variants = {
     hidden: { opacity: 0, scale: 0.78, y: 48, rotateX: 8 },
     visible: {
       opacity: 1, scale: 1, y: 0, rotateX: 0,
-      transition: { type: 'spring', stiffness: 240, damping: 24, delay: 0.08 },
+      transition: { type: 'spring' as const, stiffness: 240, damping: 24, delay: 0.08 },
     },
     exit: {
       opacity: 0, scale: 0.85, y: 28,
-      transition: { duration: 0.26, ease: 'easeIn' },
+      transition: { duration: 0.26, ease: 'easeIn' as const },
     },
   };
 
-  const imageVariants = {
+  const imageVariants: Variants = {
     hidden: { opacity: 0, scale: 0.88, y: 24 },
     visible: {
       opacity: 1, scale: 1, y: 0,
-      transition: { delay: 0.32, duration: 0.55, ease: 'easeOut' },
+      transition: { delay: 0.32, duration: 0.55, ease: 'easeOut' as const },
     },
   };
 
-  const badgeVariants = {
+  const badgeVariants: Variants = {
     hidden:   { opacity: 0, x: 28 },
-    visible:  { opacity: 1, x: 0, transition: { delay: 0.55, duration: 0.45, ease: 'easeOut' } },
+    visible:  { opacity: 1, x: 0, transition: { delay: 0.55, duration: 0.45, ease: 'easeOut' as const } },
   };
 
-  const textVariants = {
+  const textVariants: Variants = {
     hidden: { opacity: 0, y: 14 },
     visible: (i: number) => ({
       opacity: 1, y: 0,
-      transition: { delay: 0.42 + i * 0.1, duration: 0.4, ease: 'easeOut' },
+      transition: { delay: 0.42 + i * 0.1, duration: 0.4, ease: 'easeOut' as const },
     }),
   };
 
