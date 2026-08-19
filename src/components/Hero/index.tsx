@@ -389,7 +389,7 @@ const Hero: React.FC = () => {
                 {/* View My Books Button */}
                 <motion.a
                   href="/books"
-                  className="hero-books-btn absolute -bottom-14 left-1/2 -translate-x-1/2 z-30"
+                  className="hero-books-btn absolute top-[460px] left-1/2 -translate-x-1/2 z-30"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 1.1, duration: 0.6 }}
