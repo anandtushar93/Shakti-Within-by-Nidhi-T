@@ -848,6 +848,9 @@ body {
   background: rgba(197,155,39,0.1);
   color: var(--color-primary-dark);
   border: 1px solid rgba(197,155,39,0.25);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
 }
 .bk-pages-tag {
   background: rgba(104,95,82,0.08);
@@ -1012,6 +1015,173 @@ body {
 .bk-footer-link:hover {
   border-color: var(--color-primary);
 }
+
+/* ── Section Headers ─────────────────────────────────────────────────── */
+.bk-section-header {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 1.5rem 2rem;
+  border-radius: 1.25rem;
+  border: 1px solid rgba(197,155,39,0.2);
+  background: linear-gradient(135deg, #FFFDF9 0%, #FAF6EE 100%);
+  box-shadow: 0 4px 24px rgba(197,155,39,0.1);
+  position: relative;
+  overflow: hidden;
+}
+.bk-section-header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, rgba(197,155,39,0.05) 0%, transparent 70%);
+  pointer-events: none;
+}
+.bk-section-header--dino {
+  border-color: rgba(99,211,99,0.25);
+  background: linear-gradient(135deg, #f6fbf6 0%, #eef8ee 100%);
+  box-shadow: 0 4px 24px rgba(80,160,80,0.1);
+}
+.bk-section-header--dino::before {
+  background: linear-gradient(120deg, rgba(80,160,80,0.05) 0%, transparent 70%);
+}
+.bk-section-emoji {
+  font-size: 2.5rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+.bk-section-title-wrap {
+  flex: 1;
+  min-width: 0;
+}
+.bk-section-title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.375rem, 3vw, 1.875rem);
+  font-weight: 700;
+  color: var(--color-text);
+  margin: 0 0 0.2rem;
+  line-height: 1.15;
+}
+.bk-section-header--dino .bk-section-title {
+  color: #2d6a2d;
+}
+.bk-section-subtitle {
+  font-family: var(--font-body);
+  font-size: 0.825rem;
+  color: var(--color-muted);
+  margin: 0;
+}
+.bk-section-count {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  padding: 0.75rem 1.25rem;
+  background: rgba(197,155,39,0.08);
+  border: 1px solid rgba(197,155,39,0.2);
+  border-radius: 0.875rem;
+  min-width: 70px;
+}
+.bk-section-header--dino .bk-section-count {
+  background: rgba(80,160,80,0.08);
+  border-color: rgba(80,160,80,0.2);
+}
+.bk-section-count-num {
+  font-family: var(--font-heading);
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  line-height: 1;
+}
+.bk-section-header--dino .bk-section-count-num {
+  color: #3a8a3a;
+}
+.bk-section-count-label {
+  font-family: var(--font-body);
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  margin-top: 0.15rem;
+}
+
+/* ── Section Spacer ──────────────────────────────────────────────────── */
+.bk-section-spacer {
+  height: 2.5rem;
+  border-bottom: 1px dashed rgba(197,155,39,0.2);
+  margin-bottom: 0.5rem;
+}
+
+/* ── Dino Series Variants ────────────────────────────────────────────── */
+.bk-thumb-col--dino .bk-series-label {
+  color: rgba(58,138,58,0.9);
+}
+.bk-series-label--dino {
+  color: rgba(58,138,58,0.9);
+}
+.bk-badge--dino {
+  background: linear-gradient(135deg, #3a8a3a, #6dcf6d) !important;
+  color: #ffffff !important;
+  box-shadow: 0 2px 10px rgba(58,138,58,0.4) !important;
+}
+.bk-badge--paper {
+  background: linear-gradient(135deg, #C59B27, #E6B85C);
+}
+.bk-format-tag--dino {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  background: rgba(58,138,58,0.08);
+  color: #2d6a2d;
+  border-color: rgba(58,138,58,0.22);
+}
+.bk-theme-pill--dino {
+  color: #2d6a2d;
+  background: linear-gradient(135deg, rgba(58,138,58,0.08), rgba(109,207,109,0.1));
+  border-color: rgba(58,138,58,0.22);
+}
+.bk-buy-btn--dino {
+  background: linear-gradient(135deg, #3a8a3a 0%, #6dcf6d 50%, #4aaa4a 100%) !important;
+  box-shadow: 0 4px 18px rgba(58,138,58,0.35), 0 1px 4px rgba(58,138,58,0.2) !important;
+}
+.bk-buy-btn--dino:hover {
+  background: linear-gradient(135deg, #4aaa4a 0%, #7de07d 50%, #3a8a3a 100%) !important;
+  box-shadow: 0 8px 30px rgba(58,138,58,0.5), 0 2px 8px rgba(58,138,58,0.3) !important;
+}
+
+/* ── Thumbnail Placeholder ───────────────────────────────────────────── */
+.bk-thumb-placeholder {
+  width: 100%;
+  aspect-ratio: 2/3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: linear-gradient(135deg, rgba(197,155,39,0.08), rgba(230,184,92,0.12));
+  color: rgba(197,155,39,0.6);
+  font-family: var(--font-body);
+  font-size: 0.6rem;
+  font-weight: 600;
+  text-align: center;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+}
+
+/* ── New Tag on Ratings ──────────────────────────────────────────────── */
+.bk-new-tag {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #ffffff;
+  background: linear-gradient(135deg, #C59B27, #E6B85C);
+  padding: 0.1rem 0.4rem;
+  border-radius: 99px;
+  margin-left: 0.25rem;
+}
+
+
 
 /* ── Hero Books Button ────────────────────────────────────────────────── */
 .hero-books-btn {
