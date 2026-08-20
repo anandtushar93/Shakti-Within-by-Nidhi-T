@@ -57,7 +57,7 @@ const About: React.FC = () => {
   return (
     <section
       id="about"
-      className="py-28 lg:py-36 bg-gradient-about relative overflow-hidden"
+      className="py-20 lg:py-36 bg-gradient-about relative overflow-hidden"
       aria-label="About Section"
     >
       {/* Decorative background glow */}

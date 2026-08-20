@@ -62,7 +62,7 @@ const Navbar: React.FC = () => {
           </motion.a>
 
           {/* Desktop Nav Links */}
-          <div className="hidden lg:flex items-center gap-8" role="navigation">
+          <div className="hidden lg:flex items-center gap-2 lg:gap-5 xl:gap-8" role="navigation">
             {NAV_LINKS.map((link) => (
               <button
                 key={link.href}
@@ -85,72 +85,80 @@ const Navbar: React.FC = () => {
           </div>
 
           {/* CTA + Share + Mobile Hamburger */}
-          <div className="flex items-center gap-3">
-            {/* Share Button – desktop */}
-            <motion.button
-              onClick={() => setShareOpen(true)}
-              className="hidden sm:flex items-center gap-1.5 px-3.5 py-2 rounded-xl font-body text-sm font-medium transition-all cursor-pointer border"
-              style={{
-                color: '#C59B27',
-                borderColor: 'rgba(197,155,39,0.35)',
-                background: 'rgba(197,155,39,0.06)',
-              }}
-              whileHover={{ scale: 1.04, background: 'rgba(197,155,39,0.12)' } as any}
-              whileTap={{ scale: 0.96 }}
-              aria-label="Share Shakti Within"
-              id="navbar-share-btn"
-            >
-              <Share2 size={14} />
-              Share
-            </motion.button>
+          <div className="flex items-center gap-3 md:mr-10 lg:mr-0 lg:ml-4">
+            {/* Share Button – hidden when mobile sidebar is open */}
+            {!mobileOpen && (
+              <motion.button
+                onClick={() => setShareOpen(true)}
+                className="hidden sm:flex items-center gap-1.5 px-3.5 py-2 rounded-xl font-body text-sm font-medium transition-all cursor-pointer border"
+                style={{
+                  color: '#C59B27',
+                  borderColor: 'rgba(197,155,39,0.35)',
+                  background: 'rgba(197,155,39,0.06)',
+                }}
+                whileHover={{ scale: 1.04, background: 'rgba(197,155,39,0.12)' } as any}
+                whileTap={{ scale: 0.96 }}
+                aria-label="Share Shakti Within"
+                id="navbar-share-btn"
+              >
+                <Share2 size={14} />
+                Share
+              </motion.button>
+            )}
 
-            <motion.a
-              href={BRAND.whatsapp}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hidden sm:inline-flex btn-primary text-sm px-6 py-2.5 shadow-md"
-              whileHover={{ scale: 1.04 }}
-              whileTap={{ scale: 0.96 }}
-              aria-label="Book Your Consultation"
-              id="navbar-book-btn"
-            >
-              Book Consultation
-            </motion.a>
+            {/* Book Consultation – hidden when mobile sidebar is open */}
+            {!mobileOpen && (
+              <motion.a
+                href={BRAND.whatsapp}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hidden sm:inline-flex btn-primary text-sm px-6 py-2.5 shadow-md"
+                whileHover={{ scale: 1.04 }}
+                whileTap={{ scale: 0.96 }}
+                aria-label="Book Your Consultation"
+                id="navbar-book-btn"
+              >
+                Book Consultation
+              </motion.a>
+            )}
 
-            {/* Mobile Menu Trigger */}
-            <button
-              onClick={() => setMobileOpen(!mobileOpen)}
-              className="lg:hidden p-2 rounded-xl hover:bg-[#C59B27]/10 transition-colors cursor-pointer"
-              aria-label={mobileOpen ? 'Close Menu' : 'Open Menu'}
-              aria-expanded={mobileOpen}
-            >
-              <AnimatePresence mode="wait">
-                {mobileOpen ? (
-                  <motion.div
-                    key="close"
-                    initial={{ rotate: -90, opacity: 0 }}
-                    animate={{ rotate: 0, opacity: 1 }}
-                    exit={{ rotate: 90, opacity: 0 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <X size={24} className="text-[#C59B27]" />
-                  </motion.div>
-                ) : (
-                  <motion.div
-                    key="menu"
-                    initial={{ rotate: 90, opacity: 0 }}
-                    animate={{ rotate: 0, opacity: 1 }}
-                    exit={{ rotate: -90, opacity: 0 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <Menu size={24} className="text-[#C59B27]" />
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </button>
           </div>
         </Container>
       </motion.header>
+
+      {/* ── Floating Hamburger / Close Button (always on top, z-[1001]) ── */}
+      <div className="lg:hidden fixed top-0 md:top-2 right-0 z-[1001] flex items-center" style={{ height: '72px', paddingRight: '1rem' }}>
+        <button
+          onClick={() => setMobileOpen(!mobileOpen)}
+          className="p-2 rounded-xl hover:bg-[#C59B27]/10 transition-colors cursor-pointer"
+          aria-label={mobileOpen ? 'Close Menu' : 'Open Menu'}
+          aria-expanded={mobileOpen}
+        >
+          <AnimatePresence mode="wait">
+            {mobileOpen ? (
+              <motion.div
+                key="close"
+                initial={{ rotate: -90, opacity: 0 }}
+                animate={{ rotate: 0, opacity: 1 }}
+                exit={{ rotate: 90, opacity: 0 }}
+                transition={{ duration: 0.2 }}
+              >
+                <X size={24} className="text-[#C59B27]" />
+              </motion.div>
+            ) : (
+              <motion.div
+                key="menu"
+                initial={{ rotate: 90, opacity: 0 }}
+                animate={{ rotate: 0, opacity: 1 }}
+                exit={{ rotate: -90, opacity: 0 }}
+                transition={{ duration: 0.2 }}
+              >
+                <Menu size={24} className="text-[#C59B27]" />
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </button>
+      </div>
 
       {/* Mobile Menu Drawer */}
       <AnimatePresence>
@@ -160,14 +168,14 @@ const Navbar: React.FC = () => {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: '100%' }}
             transition={{ type: 'spring', damping: 28, stiffness: 300 }}
-            className="fixed inset-y-0 right-0 w-80 z-[850] glass shadow-2xl flex flex-col pt-24 px-8 pb-10 lg:hidden border-l border-[#EFE5D3]"
+            className="fixed inset-y-0 right-0 w-80 z-[1000] glass shadow-2xl flex flex-col pt-12 px-8 pb-10 lg:hidden border-l border-[#EFE5D3]"
             role="dialog"
             aria-label="Mobile Navigation"
           >
             <div className="absolute top-10 right-10 w-24 h-24 rounded-full bg-[#C59B27]/10 blur-xl pointer-events-none" />
             <div className="absolute bottom-10 left-5 w-16 h-16 rounded-full bg-[#E6B85C]/10 blur-xl pointer-events-none" />
 
-            <nav className="flex flex-col gap-2 flex-1">
+            <nav className="flex flex-col gap-1 flex-1">
               {NAV_LINKS.map((link, i) => (
                 <motion.button
                   key={link.href}
@@ -185,7 +193,7 @@ const Navbar: React.FC = () => {
             {/* Mobile Share Button */}
             <motion.button
               onClick={() => { setMobileOpen(false); setShareOpen(true); }}
-              className="flex items-center justify-center gap-2 py-3 rounded-xl font-body text-sm font-medium mt-3 cursor-pointer border"
+              className="flex items-center justify-center gap-1 py-3 rounded-xl font-body text-sm font-medium mt-2 cursor-pointer border"
               style={{
                 color: '#C59B27',
                 borderColor: 'rgba(197,155,39,0.4)',
@@ -204,7 +212,7 @@ const Navbar: React.FC = () => {
               href={BRAND.whatsapp}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-primary text-center mt-3"
+              className="btn-primary text-center mt-3 min-h-12"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
@@ -227,7 +235,7 @@ const Navbar: React.FC = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setMobileOpen(false)}
-            className="fixed inset-0 z-[840] bg-[#1C1610]/30 backdrop-blur-sm lg:hidden"
+            className="fixed inset-0 z-[999] bg-[#1C1610]/30 backdrop-blur-sm lg:hidden"
             aria-hidden="true"
           />
         )}

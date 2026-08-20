@@ -245,7 +245,7 @@ const BookModal: React.FC = () => {
                             laptop   → 320px wide
                             desktop  → 380px wide
                         */
-                        width: 'clamp(220px, 35vw, 600px)',
+                        width: 'clamp(220px, 38vw, 600px)',
                         boxShadow:
                           '0 20px 60px rgba(0,0,0,0.65), 0 4px 18px rgba(197,155,39,0.22)',
                         border: '2px solid rgba(197,155,39,0.28)',
@@ -325,7 +325,7 @@ const BookModal: React.FC = () => {
                   {/* ════════════════════════════════════════════════════════
                       RIGHT PANEL — Text & CTA
                   ════════════════════════════════════════════════════════ */}
-                  <div className="flex flex-col justify-center flex-1 min-w-0">
+                  <div className="flex flex-col justify-center flex-1 min-w-0 items-center lg:items-start">
 
                     {/* Eyebrow label */}
                     <motion.div
@@ -423,7 +423,7 @@ const BookModal: React.FC = () => {
                       variants={textVariants}
                       initial="hidden"
                       animate="visible"
-                      className="flex flex-col items-start gap-3"
+                      className="flex flex-col items-center gap-3 "
                     >
                       <a
                         id="book-modal-amazon-btn"
